@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=0.8, user-scalable=no, minimal-ui">
+  <title>hexa</title>
+  <link rel="icon" type="image/png" href="/media/favicon.ico">
+  <link rel="stylesheet" href="/code/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script defer src="/code/js/script.js"></script>
+  <meta property="og:title" content="hexa">
+  <meta property="og:url" content="https://heksa.xyz">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <div id="particles-js"></div>
+  <main class="screen" id="ekran">
+    <button id="theme-toggle" class="line">
+      <span id="theme-icon">☀️</span>
+      <span id="theme-label">light mode</span>
+    </button>   
+    <header class="title line">
+      <img src="/media/pfp.jpeg" alt="pfp" class="perspective-hover header-image">
+      <h1 class="main-title">heksa.ovh</h1>
+    </header><br>
+    <div class="typewriter-container">
+    <p class="line">
+      <span id="typewriter-dot" class="status-dot"></span>
+      <b>status</b>: <span id="typewriter-text"></span>
+    </p></div>
+    
+    <hr class="line">
+    <section class="subtitle">
+      <p class="line">15y tech fan from Poland<br>rock and rap music enjoyer</p>
+      <p class="line">- links:</p>
+      <div class="link-buttons">
+        <a href="/files/" class="line link-btn files" target="_blank"><i class="fas fa-folder-open"></i> files</a>
+        <a onclick="showElement('specs')" class="line link-btn specs"><i class="fas fa-microchip"></i> specs</a>
+        <a onclick="showElement('phones')" class="line link-btn tech"><i class="fas fa-mobile-alt"></i> tech</a>
+
+        <a href="https://t.me/hexa386" class="line link-btn tg" target="_blank"><i class="fab fa-telegram-plane"></i> telegram</a>
+        <a href="https://discordapp.com/users/1105531177886040114" class="line link-btn discord" target="_blank"><i class="fab fa-discord"></i> discord</a>
+        <a href="https://github.com/hexa386" class="line link-btn github" target="_blank"><i class="fab fa-github"></i> github</a>
+        <a href="https://instagram.com/anyl.hexa" class="line link-btn insta" target="_blank"><i class="fab fa-instagram"></i> instagram</a>
+        <a href="https://matrix.to/#/@amogusior:matrix.org" class="line link-btn matrix" target="_blank"><i class="fas fa-code-branch"></i> matrix</a>
+        <a href="https://steamcommunity.com/id/hexa386" class="line link-btn steam" target="_blank"><i class="fab fa-steam-symbol"></i> steam</a>
+        <a href="mailto:haloheksa@gmail.com" class="line link-btn mail" target="_blank"><i class="fas fa-envelope"></i> mail</a>
+      </div>          
+      <hr class="line">
+      <section id="widget" class="line">
+        <p class="line">
+          - <span id="song">loading...</span><br>
+          <small>last played song on <a href="http://last.fm/user/hexa727" target="_blank">last.fm</a></small>
+        </p>        
+      </section>
+      <hr class="line">
+      <div id="buttons" style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;">
+        <img class="line perspective-hover" src="/media/opium.gif" alt="opium" width="88" height="31">
+        <img class="line perspective-hover" src="/media/chaos.gif" alt="chaos" width="88" height="31">
+        <img class="line perspective-hover" src="/media/lone.gif" alt="lone" width="88" height="31">
+        <img class="line perspective-hover" src="/media/music.gif" alt="music" width="88" height="31">
+        <img class="line perspective-hover" src="/media/kencarson.gif" alt="kencarson" width="88" height="31">
+      </div>
+    </section>   
+  </main>
+  <section id="specs" class="screen glass" style="justify-content: start;">
+    <button class="button fixed-close" onclick="hideElement('specs');">&#10005;</button>
+    <h1 class="title line main-title">specs</h1><br><hr>
+    <p class="line">workstation:
+    <ul>
+      <li class="line">cpu: <b>Intel Core i5-12400F</b></li>
+      <li class="line">cpu cooler: <b>be quiet! Pure Rock BK009</b></li>
+      <li class="line">gpu: <b>MSI GeForce GTX 1060 6GB</b></li>
+      <li class="line">psu: <b>XFX XT 600W</b></li>
+      <li class="line">ram: <b>Kingston Beast DDR4 3200MHz 64GB (32GBx2)</b></li>
+      <li class="line">mobo: <b>ASRock B760M-HDV</b></li>
+      <li class="line">case: <b>SilentiumPC Regnum RG4T</b></li>
+      <li class="line">os: <b>Win11 + Arch</b></li>
+      <li class="line">storage:</li>
+    <ul>
+      <li class="line">SSD Goodram IRDM 128GB (windows)</li>
+      <li class="line">M.2 NVMe Adata XPG 256GB (linux)</li>
+      <li class="line">M.2 NVMe Kingston NV2 1TB (data)</li>
+      <li class="line">HDD WD Blue 1TB (music)</li>
+      <li class="line">HDD Seagate Barracuda 2TB (archive)</li>
+    </ul></li></ul>
+    <p class="line">peripherals:</p>
+    <ul>
+      <li class="line">mouse: <b>SPC Gear LIX</b></li>
+      <li class="line">keyboard: <b>SPC Gear GK630K Red</b></li>
+      <li class="line">headphones: <b>ISK HD9999 + FiiO E10K</b></li>
+      <li class="line">controller: <b>Xbox One Controller</b></li>
+    </ul>
+    <p class="line">daily devices:</p>
+    <ul>
+      <li class="line">phone: <b>Google Pixel 8 Pro</b></li>
+      <li class="line">laptop: <b>ThinkPad T450 12/512</b></li>
+      <li class="line">audio player: <b>Sony Walkman NW-A45</b></li>
+      <li class="line">headphones: <b>Salnotes 7Hz Zero:2</b></li>
+      <li class="line">watch: <b>G-Shock GA-B2100</b></li>
+    </ul>
+    <p class="line">audio setup:</p>
+    <ul>
+      <li class="line">amplifier: <b>Denon PMA-520A</b></li>
+      <li class="line">cassette deck: <b>UHER UCT-220W</b></li>
+      <li class="line">speakers: <b>Blaupunkt MS30BT</b></li>
+      <li class="line">dac: <b>FiiO E10K</b></li>
+    </ul><hr>
+  </section>
+  <section id="phones" class="screen scrollable-box" style="justify-content: start;">
+      <button class="button fixed-close" onclick="hideElement('phones');">&#10005;</button>
+    <h1 class="title line main-title">tech</h1><br><br>
+    <p class="line"> • if a something doesn't have any notes, it doesn't have any flaws.</p>
+    <p class="line"> • duplicates mean I have multiple units.</p>
+    <p class="line"> • info may be outdated, last update: 22.03.2025</p>
+    <br><hr>
+    <div id="phone-list">
+      <div id="brands-container"></div>
+    </div><hr>
+  </section>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
