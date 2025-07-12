@@ -223,12 +223,12 @@ a:active { color: #fff; }
   margin: 20px auto 10px auto;
   font-family: "VCR OSD Mono", monospace;
   font-size: clamp(28px, 6vw, 60px);
-  color: #00ff90;
+  color: #ffffff;
   text-shadow:
-    0 0 2px #00ff90,
-    0 0 5px #00ff90,
-    0 0 8px #00ff90,
-    0 0 12px #00ff90;
+    0 0 2px #6600ff,
+    0 0 5px #6600ff,
+    0 0 8px #6600ff,
+    0 0 12px #6600ff;
   letter-spacing: 2px;
   line-height: 1;
   animation: crt-glow 2.4s infinite alternate ease-in-out;
@@ -269,7 +269,7 @@ a:active { color: #fff; }
 }
 
 /* Scanline overlay (as pseudo-element) */
-.main-title::after {
+/*.main-title::after {
   content: '';
   position: absolute;
   top: 0;
@@ -293,10 +293,10 @@ a:active { color: #fff; }
 /* Subtle flicker */
 @keyframes crt-glow {
   0% {
-    text-shadow: 0 0 2px #00ff90, 0 0 5px #00ff90, 0 0 10px #00ff90;
+    text-shadow: 0 0 2px #6600ff, 0 0 5px #6600ff, 0 0 10px #6600ff;
   }
   100% {
-    text-shadow: 0 0 3px #00ff90, 0 0 7px #00ff90, 0 0 14px #00ff90;
+    text-shadow: 0 0 3px #6600ff, 0 0 7px #6600ff, 0 0 14px #6600ff;
   }
 }
 
@@ -322,9 +322,9 @@ a:active { color: #fff; }
   0% {
     filter: none;
   }
-  50% {
+  /* 50% {
     filter: hue-rotate(180deg) contrast(2) saturate(2);
-  }
+  } */
   100% {
     filter: none;
   }
@@ -373,9 +373,9 @@ a:active { color: #fff; }
 }
 
 .brand-button:hover {
-  background: #00ff90;
-  color: #000;
-  border-color: #00ff90;
+  background: #6600ff;
+  color: #fff;
+  border-color: #6600ff;
   transform: scale(1.03);
   text-shadow: 0 0 3px #000;
 }
@@ -387,9 +387,9 @@ body.light .brand-button {
 }
 
 body.light .brand-button:hover {
-  background: #00cc88;
+  background: #9900ff;
   color: #fff;
-  border-color: #00cc88;
+  border-color: #9900ff;
 }
 
 .link-buttons {
@@ -429,9 +429,9 @@ body.light .brand-button:hover {
 
 .link-btn:hover {
   transform: translateY(-2px);
-  background: #00ff90;
-  color: #000;
-  border-color: #00ff90;
+  background: #6600ff;
+  color: #fff;
+  border-color: #6600ff;
 }
 
 body.light .link-btn {
@@ -441,9 +441,9 @@ body.light .link-btn {
 }
 
 body.light .link-btn:hover {
-  background: #00cc88;
+  background: #9900ff;
   color: #fff;
-  border-color: #00cc88;
+  border-color: #9900ff;
 }
 
 
@@ -455,9 +455,9 @@ body.light .social-btn {
 }
 
 body.light .social-btn:hover {
-  background: #00cc88;
+  background: #9900ff;
   color: #fff;
-  border-color: #00cc88;
+  border-color: #9900ff;
 }
 
 .brand-button .arrow {
