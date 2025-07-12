@@ -6,7 +6,7 @@
 /* Animations */
 @keyframes screen-enter {
   0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-  60% { transfaorm: translate(-50%, -50%) scale(1.05); opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
   80% { transform: translate(-50%, -50%) scale(0.97); }
   100% { transform: translate(-50%, -50%) scale(1); }
 }
@@ -234,6 +234,10 @@ a:active { color: #fff; }
   animation: crt-glow 2.4s infinite alternate ease-in-out;
   overflow: hidden;
   display: flex;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #6600ff;
 }
 
 #buttons {
@@ -489,6 +493,104 @@ body.light .social-btn:hover {
 .phone-list { padding-left: 15px; }
 #widget, small { margin: 2px; }
 
+/* Last played song info styling */
+.lastfm-info {
+  display: block;
+  text-align: center;
+  color: #888;
+  font-size: 0.95em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+body.light .lastfm-info {
+  color: #444;
+}
+
+/* Song text styling */
+#song {
+  display: block;
+  text-align: center;
+  font-size: 0.95em;
+  margin-top: 0.5em;
+  margin-bottom: 0.2em;
+}
+
+/* Song title and artist white, dash grey */
+.song-title,
+.song-artist {
+  color: #fff;
+  font-weight: bold;
+}
+
+.song-dash {
+  color: #888;
+  font-weight: normal;
+}
+
+body.light .song-dash {
+  color: #444;
+}
+
+/* Last.fm and GNU GPL link pop-out style */
+.lastfm-info a,
+footer a[href*="gnu.org/licenses/gpl-3.0.html"] {
+  color: #fff !important;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #6600ff;
+  transition: text-shadow 0.2s, text-decoration-color 0.2s;
+}
+
+.lastfm-info a:hover,
+.lastfm-info a:focus,
+footer a[href*="gnu.org/licenses/gpl-3.0.html"]:hover,
+footer a[href*="gnu.org/licenses/gpl-3.0.html"]:focus,
+footer .footer-copyright:hover,
+footer .footer-copyright:focus {
+  color: #fff !important;
+  text-decoration-color: #6600ff;
+  text-shadow: 0 0 8px #6600ff99;
+}
+
+/* Footer copyright styling (symbol and year grayer) */
+footer .footer-copyright,
+footer .footer-year {
+  color: #bbb !important;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #6600ff;
+  transition: color 0.2s, text-shadow 0.2s, text-decoration-color 0.2s;
+}
+
+footer .footer-copyright:hover,
+footer .footer-copyright:focus,
+footer .footer-year:hover,
+footer .footer-year:focus {
+  color: #fff !important;
+  text-decoration-color: #6600ff;
+  text-shadow: 0 0 8px #6600ff99;
+}
+
+/* Year styling (grayer) */
+footer .footer-year {
+  color: #bbb !important;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #6600ff;
+  transition: text-shadow 0.2s, text-decoration-color 0.2s;
+}
+
+footer .footer-year:hover,
+footer .footer-year:focus {
+  color: #fff !important;
+  text-decoration-color: #6600ff;
+  text-shadow: 0 0 8px #6600ff99;
+}
+
 /* Responsive */
 @media only screen and (max-width: 600px) {
   .screen, #phones, #specs {
@@ -532,6 +634,10 @@ body.light .social-btn:hover {
     font-size: clamp(36px, 10vw, 72px);
     letter-spacing: 1px;
     margin-top: 10px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #6600ff;
   }
 
   
@@ -769,4 +875,15 @@ body.light #theme-toggle:hover {
 
 body.light .perspective-hover::before {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode: make footer text black */
+body.light footer .footer-copyright,
+body.light footer .footer-year,
+body.light footer a[href*="gnu.org/licenses/gpl-3.0.html"],
+body.light .lastfm-info a,
+body.light .song-title,
+body.light .song-artist {
+  color: #111 !important;
+  text-decoration-color: #6600ff;
 }

@@ -45,7 +45,8 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(res => res.json())
     .then(json => {
       const track = json.track;
-      document.querySelector('#song').textContent = `${track.name} - ${track.artist['#text']}`;
+      document.querySelector('#song').innerHTML =
+        `<span class="song-title">${track.name}</span> <span class="song-dash">-</span> <span class="song-artist">${track.artist['#text']}</span>`;
     });
 
   fetch('/code/js/devices.json')
