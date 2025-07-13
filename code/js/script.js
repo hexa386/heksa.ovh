@@ -242,70 +242,44 @@ function loadParticles(theme = 'dark') {
 
 // === TYPEWRITER ===
 const userId = '1105531177886040114';
-const typewriterText = document.getElementById('typewriter-text');
-const typewriterDot = document.getElementById('typewriter-dot');
 
-let statusText = '';
-let statusClass = '';
-let motdText = '';
-
-const typeSpeed = 80;
-const eraseSpeed = 40;
-const delayBetween = 1500;
-
-function type(text, cb) {
-  let i = 0;
-  const interval = setInterval(() => {
-    if (i < text.length) {
-      typewriterText.textContent += text.charAt(i++);
-    } else {
-      clearInterval(interval);
-      setTimeout(cb, delayBetween);
-    }
-  }, typeSpeed);
-}
-
-function erase(cb) {
-  const interval = setInterval(() => {
-    if (typewriterText.textContent.length > 0) {
-      typewriterText.textContent = typewriterText.textContent.slice(0, -1);
-    } else {
-      clearInterval(interval);
-      setTimeout(cb, 300);
-    }
-  }, eraseSpeed);
-}
-
-function loopTypewriter() {
-  typewriterDot.className = `status-dot ${statusClass}`;
-  type(statusText, () => {
-    erase(() => {
-      typewriterDot.className = 'status-dot';
-      type(motdText, () => {
-        erase(() => loopTypewriter());
-      });
-    });
-  });
-}
+// New element for static status
+const staticDiscordStatusEl = document.getElementById('static-discord-status');
 
 fetch(`https://api.lanyard.rest/v1/users/${userId}`)
   .then(res => res.json())
   .then(data => {
-    statusText = data.data.discord_status || 'unknown';
-    statusClass = {
-      online: 'status-online',
-      idle: 'status-idle',
-      dnd: 'status-dnd',
-      offline: 'status-offline'
-    }[statusText] || 'status-offline';
-    motdText = data.data.kv?.motd || 'no motd';
-    loopTypewriter();
+    const discordStatus = data.data.discord_status || 'offline';
+    let statusDisplay = '';
+    let statusColorClass = '';
+    switch (discordStatus) {
+      case 'online':
+        statusDisplay = 'online';
+        statusColorClass = 'status-online';
+        break;
+      case 'idle':
+        statusDisplay = 'idle';
+        statusColorClass = 'status-idle';
+        break;
+      case 'dnd':
+        statusDisplay = 'do not disturb';
+        statusColorClass = 'status-dnd';
+        break;
+      case 'offline':
+      default:
+        statusDisplay = 'offline';
+        statusColorClass = 'status-offline';
+        break;
+    }
+
+    if (staticDiscordStatusEl) {
+      staticDiscordStatusEl.innerHTML = `<span class="status-dot ${statusColorClass}"></span>${statusDisplay}`;
+    }
   })
   .catch(() => {
-    statusText = 'offline';
-    statusClass = 'status-offline';
-    motdText = 'motd error';
-    loopTypewriter();
+    if (staticDiscordStatusEl) {
+      staticDiscordStatusEl.innerHTML = '<span class="status-dot status-offline"></span>offline (error)';
+    }
   });
 
 // === MOTYW + PARTICLES + ANIMACJA EMOTKI ===
@@ -317,7 +291,7 @@ let currentTheme = localStorage.getItem('theme');
 if (!currentTheme) {
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   currentTheme = prefersDark ? 'dark' : 'light';
-  localStorage.setItem('theme', currentTheme); // opcjonalnie: zapisz preferencję
+  localStorage.setItem('theme', currentTheme);
 }
 
 
@@ -364,7 +338,24 @@ function startTitleGlitchLoop() {
     setTimeout(() => {
       title.classList.remove('glitch-active');
     }, 400);
-  }, 4000 + Math.random() * 3000); // glitch co 4-7 sekund losowo
+  }, 4000 + Math.random() * 3000);
 }
 
 startTitleGlitchLoop();
+
+// === AGE CALCULATION ===
+function calculateAge(birthDateString, elementId) {
+    const birthDate = new Date(birthDateString);
+    const today = new Date();
+
+    const ageInMilliseconds = today.getTime() - birthDate.getTime();
+    const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+
+    const ageElement = document.getElementById(elementId);
+    if (ageElement) {
+        ageElement.textContent = ageInYears.toFixed(1).toLocaleString('pl-PL');
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    calculateAge('2010-10', 'current-age'); // birthday leak lmfao
+});
