@@ -148,9 +148,12 @@ h1 {
 
 /* Links */
 a {
-  color: #7f7f7f;
+  color: #fff;
   font-size: 1.1rem;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #6600ff;
   opacity: 0.7;
   cursor: pointer;
   transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease, opacity 0.2s ease;
@@ -160,8 +163,12 @@ a:hover {
   text-shadow: 0 0 5px #fff;
   transform: scale(1.1);
   opacity: 1;
+  text-decoration-color: #6600ff;
 }
-a:active { color: #fff; }
+a:active {
+  color: #fff;
+  text-decoration-color: #6600ff;
+}
 
 #typewriter-text {
   flex: 1 1 auto;
@@ -532,64 +539,6 @@ body.light .song-dash {
   color: #444;
 }
 
-/* Last.fm and GNU GPL link pop-out style */
-.lastfm-info a,
-footer a[href*="gnu.org/licenses/gpl-3.0.html"] {
-  color: #fff !important;
-  font-weight: bold;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: #6600ff;
-  transition: text-shadow 0.2s, text-decoration-color 0.2s;
-}
-
-.lastfm-info a:hover,
-.lastfm-info a:focus,
-footer a[href*="gnu.org/licenses/gpl-3.0.html"]:hover,
-footer a[href*="gnu.org/licenses/gpl-3.0.html"]:focus,
-footer .footer-copyright:hover,
-footer .footer-copyright:focus {
-  color: #fff !important;
-  text-decoration-color: #6600ff;
-  text-shadow: 0 0 8px #6600ff99;
-}
-
-/* Footer copyright styling (symbol and year grayer) */
-footer .footer-copyright,
-footer .footer-year {
-  color: #bbb !important;
-  font-weight: bold;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: #6600ff;
-  transition: color 0.2s, text-shadow 0.2s, text-decoration-color 0.2s;
-}
-
-footer .footer-copyright:hover,
-footer .footer-copyright:focus,
-footer .footer-year:hover,
-footer .footer-year:focus {
-  color: #fff !important;
-  text-decoration-color: #6600ff;
-  text-shadow: 0 0 8px #6600ff99;
-}
-
-/* Year styling (grayer) */
-footer .footer-year {
-  color: #bbb !important;
-  font-weight: bold;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: #6600ff;
-  transition: text-shadow 0.2s, text-decoration-color 0.2s;
-}
-
-footer .footer-year:hover,
-footer .footer-year:focus {
-  color: #fff !important;
-  text-decoration-color: #6600ff;
-  text-shadow: 0 0 8px #6600ff99;
-}
 
 /* Responsive */
 @media only screen and (max-width: 600px) {
@@ -729,11 +678,16 @@ body.light #phones {
 
 
 body.light a {
-  color: #444;
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #6600ff;
 }
 body.light a:hover {
   color: #000;
   text-shadow: 0 0 5px #000;
+  text-decoration-color: #6600ff;
 }
 
 body.light .status-dot {
