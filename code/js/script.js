@@ -119,7 +119,6 @@ window.addEventListener('DOMContentLoaded', () => {
           brandButton.addEventListener('click', toggleVisibility);
         });
       };
-      
 
       createHeader('phones', brandsContainer);
       renderDevices(data.phones, brandsContainer);
@@ -182,10 +181,7 @@ document.querySelectorAll('.perspective-hover').forEach(el => {
 // === PARTICLES.JS CONFIG ===
 const baseParticlesConfig = {
   particles: {
-    number: {
-      value: 53,
-      density: { enable: true, value_area: 800 }
-    },
+    number: { value: 53, density: { enable: true, value_area: 800 }},
     color: { value: "#ffffff" },
     shape: {
       type: "circle",
@@ -195,21 +191,10 @@ const baseParticlesConfig = {
     },
     opacity: { value: 0.5, random: false },
     size: { value: 1, random: true },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#ffffff",
-      opacity: 0.4,
-      width: 1
-    },
+    line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
     move: {
-      enable: true,
-      speed: 6,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false
+      enable: true, speed: 6, direction: "none",
+      random: false, straight: false, out_mode: "out", bounce: false
     }
   },
   interactivity: {
@@ -220,10 +205,7 @@ const baseParticlesConfig = {
       resize: true
     },
     modes: {
-      grab: {
-        distance: 400,
-        line_linked: { opacity: 1 }
-      },
+      grab: { distance: 400, line_linked: { opacity: 1 }},
       repulse: { distance: 200, duration: 0.4 }
     }
   },
@@ -233,54 +215,55 @@ const baseParticlesConfig = {
 function loadParticles(theme = 'dark') {
   const config = JSON.parse(JSON.stringify(baseParticlesConfig));
   const isLight = theme === 'light';
-
   config.particles.color.value = isLight ? "#000000" : "#ffffff";
   config.particles.line_linked.color = isLight ? "#222222" : "#ffffff";
-
   particlesJS("particles-js", config);
 }
 
-// === TYPEWRITER ===
+// === TYPEWRITER & DISCORD STATUS + ACTIVITY ===
 const userId = '1105531177886040114';
-
-// New element for static status
 const staticDiscordStatusEl = document.getElementById('static-discord-status');
+const activityEl = document.getElementById('discord-activity');
 
-fetch(`https://api.lanyard.rest/v1/users/${userId}`)
-  .then(res => res.json())
-  .then(data => {
-    const discordStatus = data.data.discord_status || 'offline';
-    let statusDisplay = '';
-    let statusColorClass = '';
-    switch (discordStatus) {
-      case 'online':
-        statusDisplay = 'online';
-        statusColorClass = 'status-online';
-        break;
-      case 'idle':
-        statusDisplay = 'idle';
-        statusColorClass = 'status-idle';
-        break;
-      case 'dnd':
-        statusDisplay = 'do not disturb';
-        statusColorClass = 'status-dnd';
-        break;
-      case 'offline':
-      default:
-        statusDisplay = 'offline';
-        statusColorClass = 'status-offline';
-        break;
-    }
+function fetchDiscordInfo() {
+  fetch(`https://api.lanyard.rest/v1/users/${userId}`)
+    .then(res => res.json())
+    .then(data => {
+      const status = data.data.discord_status || 'offline';
+      let label = '', color = '';
+      switch (status) {
+        case 'online': label = 'online'; color = 'status-online'; break;
+        case 'idle': label = 'idle'; color = 'status-idle'; break;
+        case 'dnd': label = 'do not disturb'; color = 'status-dnd'; break;
+        default: label = 'offline'; color = 'status-offline'; break;
+      }
 
-    if (staticDiscordStatusEl) {
-      staticDiscordStatusEl.innerHTML = `<span class="status-dot ${statusColorClass}"></span>${statusDisplay}`;
-    }
-  })
-  .catch(() => {
-    if (staticDiscordStatusEl) {
-      staticDiscordStatusEl.innerHTML = '<span class="status-dot status-offline"></span>offline (error)';
-    }
-  });
+      if (staticDiscordStatusEl) {
+        staticDiscordStatusEl.innerHTML = `<span class="status-dot ${color}"></span>${label}`;
+      }
+
+      const activities = data.data.activities;
+      const nonCustom = activities.find(a => a.type !== 4); // skip custom statuses
+
+    if (nonCustom && activityEl) {
+        activityEl.textContent = nonCustom.name;
+      }
+    else if (activityEl) {
+        activityEl.innerHTML = 'nothing';
+      }
+    })
+    .catch(() => {
+      if (staticDiscordStatusEl) {
+        staticDiscordStatusEl.innerHTML = 'fetch error';
+      }
+      if (activityEl) {
+        activityEl.innerHTML = 'fetch error';
+      }
+    });
+}
+
+fetchDiscordInfo();
+setInterval(fetchDiscordInfo, 15000); // refresh every 15s
 
 // === MOTYW + PARTICLES + ANIMACJA EMOTKI ===
 const themeToggle = document.getElementById('theme-toggle');
@@ -289,11 +272,10 @@ const themeLabel = document.getElementById('theme-label');
 let currentTheme = localStorage.getItem('theme');
 
 if (!currentTheme) {
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   currentTheme = prefersDark ? 'dark' : 'light';
   localStorage.setItem('theme', currentTheme);
 }
-
 
 if (currentTheme === 'light') {
   document.body.classList.add('light');
@@ -308,7 +290,6 @@ loadParticles(currentTheme);
 
 themeToggle.addEventListener('click', () => {
   document.body.classList.add('theme-transition');
-
   themeIcon.classList.add('rotating');
   setTimeout(() => themeIcon.classList.remove('rotating'), 600);
 
@@ -320,7 +301,7 @@ themeToggle.addEventListener('click', () => {
   themeLabel.classList.add('glitch-text');
 
   themeLabel.textContent = isLight ? 'dark mode' : 'light mode';
-  themeIcon.textContent = isLight ? '🌙' : '☀️';  
+  themeIcon.textContent = isLight ? '🌙' : '☀️';
 
   localStorage.setItem('theme', newTheme);
   loadParticles(newTheme);
@@ -332,7 +313,6 @@ themeToggle.addEventListener('click', () => {
 
 function startTitleGlitchLoop() {
   const title = document.querySelector('.main-title');
-
   setInterval(() => {
     title.classList.add('glitch-active');
     setTimeout(() => {
@@ -345,17 +325,15 @@ startTitleGlitchLoop();
 
 // === AGE CALCULATION ===
 function calculateAge(birthDateString, elementId) {
-    const birthDate = new Date(birthDateString);
-    const today = new Date();
-
-    const ageInMilliseconds = today.getTime() - birthDate.getTime();
-    const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
-
-    const ageElement = document.getElementById(elementId);
-    if (ageElement) {
-        ageElement.textContent = ageInYears.toFixed(1).toLocaleString('pl-PL');
-    }
+  const birthDate = new Date(birthDateString);
+  const today = new Date();
+  const ageInMilliseconds = today.getTime() - birthDate.getTime();
+  const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+  const ageElement = document.getElementById(elementId);
+  if (ageElement) {
+    ageElement.textContent = ageInYears.toFixed(1).toLocaleString('pl-PL');
+  }
 }
 document.addEventListener("DOMContentLoaded", () => {
-    calculateAge('2010-10', 'current-age'); // birthday leak lmfao
+  calculateAge('2010-10', 'current-age');
 });
