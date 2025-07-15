@@ -604,12 +604,17 @@ body.light .lastfm-info {
     font-size: 24px;
   }
 
-  .song-link {
-    white-space: normal; /* allow wrap */
+  #song {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  /* Trick: hide the dash and force a line break using ::before */
-  .song-link::before {
-    content: "";
+  .separator {
+    display: none;
+  }
+  .artist-name {
+    font-size: 0.9em;
+    opacity: 0.8;
   }
 
   p.line,
