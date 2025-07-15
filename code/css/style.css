@@ -405,7 +405,7 @@ a:active {
 }
 
 .circle-btn.steam:hover {
-  background: linear-gradient(135deg, #171a21 0%, #2a475e 50%, #66c0f4 100%);
+  background: linear-gradient(0deg, #171a21 0%, #2a475e 50%, #66c0f4 100%);
   border-color: #66c0f4;
   color: white;
 }
