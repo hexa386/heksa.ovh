@@ -405,8 +405,9 @@ a:active {
 }
 
 .circle-btn.steam:hover {
-  background-color: #00adee;
-  border-color: #007bb8;
+  background: linear-gradient(135deg, #171a21 0%, #2a475e 50%, #66c0f4 100%);
+  border-color: #66c0f4;
+  color: white;
 }
 
 .circle-btn.mail:hover {
