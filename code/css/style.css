@@ -195,7 +195,7 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 4rem 4rem;
+  padding: 2rem 2rem;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   border: 0.1rem solid #fff;
@@ -218,6 +218,7 @@ h1 {
   vertical-align: middle; 
   object-fit: contain; 
   -webkit-user-drag: none;
+  border-radius: 10px;
 }
 .stretched-image { 
   height: 100px; width: 200px; object-fit: fill; 
@@ -235,6 +236,7 @@ h1 {
   aspect-ratio: 1 / 1;
   object-fit: contain;
   -webkit-user-drag: none;
+  border-radius: 10px;
 }
 
 /* === links */
@@ -385,6 +387,12 @@ a:active {
   color: white;
 }
 
+.circle-btn.tiktok:hover {
+  background: radial-gradient(circle at 30% 107%, #69C9D0 0%, #69C9D0 5%, #EE1D52 45%, #EE1D52 60%, #000000 90%);
+  border-color: #EE1D52;
+  color: white;
+}
+
 .circle-btn.matrix:hover {
   background-color: #2ecc71;
   border-color: #27ae60;
@@ -460,6 +468,7 @@ a:active {
 #tech .title, #specs .title, #tech h1, #specs h1 {
   text-align: left !important;
   justify-content: flex-start !important;
+  padding: 0.5rem 0.5rem;
 }
 
 /* === layout elements */
@@ -481,9 +490,24 @@ a:active {
 }
 
 #copyright {
-  text-align: center; 
+  text-align: left; 
   font-weight: bold;
-  text-wrap: balance;
+  text-wrap: pretty;
+  color: #888;
+}
+
+#copyright a {
+  color: #fff;
+  opacity: 0.7;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #888;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+body.light #copyright a {
+  color: #000;
 }
 
 .brand-button:hover {
@@ -557,8 +581,6 @@ body.light .circle-btn {
   display: block;
   text-align: center;
   font-size: 0.95em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
   font-weight: bold;
 }
 
@@ -576,14 +598,12 @@ body.light .circle-btn {
 .song-name {
   font-weight: 600;
   font-size: 1.1em;
-  display: block;
 }
 
 .artist-name {
   font-size: 0.9em;
   opacity: 0.8;
   display: block;
-  margin-top: 0.1em;
 }
 
 #status {
@@ -591,22 +611,6 @@ body.light .circle-btn {
   font-size: 0.85em;
   opacity: 0.7;
   margin-bottom: 0.5em;
-}
-
-#cover-link {
-  display: inline-block;
-  margin-top: 0.5em;
-  max-width: 150px; /* or whatever size you want */
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-#cover {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
 }
 
 body.light .lastfm-info {
@@ -720,6 +724,7 @@ body.light .lastfm-info {
     transition: none !important;
     max-width: none !important;
     z-index: 9999 !important;
+    text-align: center;
   }
 
   #theme-toggle:hover {

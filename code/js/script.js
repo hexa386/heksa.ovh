@@ -60,21 +60,12 @@ async function updateLastFM() {
     const coverEl = document.getElementById("cover");
     const lastfmProfileUrl = "http://last.fm/user/hexa727";
     const artistUrl = `https://www.last.fm/music/${encodeURIComponent(artist.replace(/ /g, '+'))}`;
-const albumUrl = track.album?.url || link; // fallback to song url if no album url
-
+    
 songEl.innerHTML = `
   <a href="${link}" target="_blank" class="song-link song-name">${name}</a>
   <br>
   <a href="${artistUrl}" target="_blank" class="song-link artist-name">${artist}</a>
 `;
-
-statusEl.style.textAlign = 'left';
-
-if (image) {
-  coverEl.outerHTML = `<a href="${albumUrl}" target="_blank" id="cover-link"><img id="cover" src="${image}" alt="${name} cover"></a>`;
-} else {
-  coverEl.outerHTML = ''; // or handle no image case if you want
-}
 
 
 if (isNowPlaying) {
