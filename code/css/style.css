@@ -16,8 +16,7 @@
 
 @keyframes screen-enter {
   0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-  60% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
-  80% { transform: translate(-50%, -50%) scale(0.97); }
+  60% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(1); }
 }
 
@@ -767,7 +766,7 @@ body.light .perspective-hover:hover {
 }
 
 body.theme-transition {
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 1s ease, color 1s ease;
 }
 
 
