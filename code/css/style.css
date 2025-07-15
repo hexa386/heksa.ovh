@@ -483,7 +483,6 @@ a:active {
 #copyright {
   text-align: center; 
   font-weight: bold;
-  font-size: 0.9rem;
   text-wrap: balance;
 }
 
@@ -507,17 +506,10 @@ body.light .brand-button:hover {
   border-color: #9900ff;
 }
 
-/* Light theme override */
-body.light .social-btn {
-  background: #eee;
+body.light .circle-btn {
+  background: #fff;
   color: #000;
-  border-color: #aaa;
-}
-
-body.light .social-btn:hover {
-  background: #9900ff;
-  color: #fff;
-  border-color: #9900ff;
+  border-color: #888;
 }
 
 .brand-button .arrow {
