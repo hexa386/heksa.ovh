@@ -393,6 +393,12 @@ a:active {
   color: white;
 }
 
+.circle-btn.youtube:hover {
+  background: radial-gradient(circle at 30% 107%, #FF0000 0%, #FF0000 60%, #CC0000 90%);
+  border-color: #FF0000;
+  color: white;
+}
+
 .circle-btn.matrix:hover {
   background-color: #2ecc71;
   border-color: #27ae60;
