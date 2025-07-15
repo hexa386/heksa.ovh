@@ -23,6 +23,64 @@ function hideElement(id) {
   void el.offsetWidth;
   el.classList.add('fade-close');
 
+let currentSubmenuId = null;
+
+// override showElement to include history state
+function showElement(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.style.display = 'block';
+  el.style.opacity = '1';
+  el.style.left = '50%';
+  el.style.top = '50%';
+  el.style.transform = 'translate(-50%, -50%) scale(1)';
+  el.scrollTop = 0;
+
+  const lines = el.querySelectorAll('.line');
+  lines.forEach((line, i) => {
+    line.style.animation = 'none';
+    void line.offsetWidth;
+    line.style.animation = `line-fade 0.4s ease forwards`;
+    line.style.animationDelay = `${i * 0.06}s`;
+  });
+
+  // push to history so back button can close submenu
+  history.pushState({ submenu: id }, '', '#' + id);
+  currentSubmenuId = id;
+}
+
+// add global popstate listener for back button
+window.addEventListener('popstate', () => {
+  if (currentSubmenuId) {
+    hideElement(currentSubmenuId);
+    currentSubmenuId = null;
+  }
+});
+
+// override hideElement to reset current submenu
+function hideElement(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.classList.remove('fade-close');
+  void el.offsetWidth;
+  el.classList.add('fade-close');
+
+  setTimeout(() => {
+    el.style.display = 'none';
+    el.classList.remove('fade-close');
+  }, 400);
+
+  if (currentSubmenuId === id) {
+    currentSubmenuId = null;
+    // go back in history if submenu was pushed
+    if (history.state?.submenu === id) {
+      history.back(); // will trigger popstate and hide the element again
+    }
+  }
+}
+
   setTimeout(() => {
     el.style.display = 'none';
     el.classList.remove('fade-close');
