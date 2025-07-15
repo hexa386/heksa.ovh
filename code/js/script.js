@@ -59,9 +59,13 @@ async function updateLastFM() {
     const statusEl = document.getElementById("status");
     const coverEl = document.getElementById("cover");
     const lastfmProfileUrl = "http://last.fm/user/hexa727";
+    const artistUrl = `https://www.last.fm/music/${encodeURIComponent(artist.replace(/ /g, '+'))}`;
 
-songEl.innerHTML = `<a href="${link}" target="_blank" class="song-link">${name} • ${artist}</a>`;
-
+songEl.innerHTML = `
+  <a href="${link}" target="_blank" class="song-link song-name">${name}</a>
+  <span class="separator">&bull;</span>
+  <a href="${artistUrl}" target="_blank" class="song-link artist-name">${artist}</a>
+`;
 
 
 if (isNowPlaying) {
