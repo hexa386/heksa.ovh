@@ -484,7 +484,8 @@ a:active {
 
 #copyright {
   text-align: center; 
-  font-weight: bold;;
+  font-weight: bold;
+  font-size: 0.8rem;
 }
 
 .brand-button:hover {
