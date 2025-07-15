@@ -16,7 +16,6 @@
 
 @keyframes screen-enter {
   0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-  60% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(1); }
 }
 
@@ -484,7 +483,8 @@ a:active {
 #copyright {
   text-align: center; 
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  text-wrap: balance;
 }
 
 .brand-button:hover {
@@ -766,7 +766,7 @@ body.light .perspective-hover:hover {
 }
 
 body.theme-transition {
-  transition: background-color 1s ease, color 1s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 
@@ -859,7 +859,7 @@ body.light #theme-toggle:hover {
   height: 100%;
   transform: translate(-50%, -50%);
   border-radius: inherit;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); /* domyślny cień */
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
   z-index: -1;
   pointer-events: none;
 }
