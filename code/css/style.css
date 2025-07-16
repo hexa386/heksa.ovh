@@ -616,7 +616,6 @@ body.light #last {
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  padding: 10px;
 }
 
 body.light a {
@@ -667,7 +666,6 @@ body.theme-transition {
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
-
   width: 42px;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.35s ease;
   transform-origin: right center;
@@ -746,7 +744,15 @@ body.light .circle-btn {
   filter: invert(1) hue-rotate(180deg);
 }
 
+ body.light .matrix-logo {
+  filter: invert(1) hue-rotate(180deg);
+}
+
  body.light .osu:hover .osu-logo {
+  filter: invert(0) hue-rotate(360deg);
+}
+
+ body.light .martix:hover .matrix-logo {
   filter: invert(0) hue-rotate(360deg);
 }
 
@@ -805,6 +811,10 @@ body.light .circle-btn:hover {
 
 /* ====== mobile responsiveness */
 @media only screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
   .screen, #tech, #specs {
     position: fixed !important;
     top: 0 !important;
@@ -828,6 +838,14 @@ body.light .circle-btn:hover {
     font-size: 20px;
   }
 
+  #links, #about {
+  padding: 1px;
+  }
+
+  #last {
+  padding: 1px;
+  }
+
   .circle-btn {
     width: 40px;
     height: 40px;
@@ -839,16 +857,16 @@ body.light .circle-btn:hover {
   height: 25px !important;
   }
 
+  .matrix-logo {
+  width: 25px !important;
+  height: 25px !important;
+  }
+
   #song {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
-
-  .separator {
-    display: none;
-  }
-
   .lastfm-container {
   display: flex;
   align-items: center;
@@ -941,6 +959,7 @@ body.light .circle-btn:hover {
     color: #fff !important;
     border-color: #888 !important;
   }
+  
 
   #theme-label {
     display: none !important;
@@ -952,6 +971,11 @@ body.light .circle-btn:hover {
   }
 
   .osu-logo {
+  width: 25px !important;
+  height: 25px !important;
+  }
+
+  .matrix-logo {
   width: 25px !important;
   height: 25px !important;
   }
