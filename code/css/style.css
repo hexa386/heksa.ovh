@@ -3,8 +3,9 @@
   src: url("/fonts/VCR_OSD_MONO_1.001.ttf");
 }
 
-/* === keyframes */
+/* === animations */
 
+/* text shimmer effect */
 @keyframes shimmer {
   0% {
     background-position: -150% center; /* start off more left */
@@ -14,21 +15,30 @@
   }
 }
 
+/* screen enter animation */
 @keyframes screen-enter {
   0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
   100% { transform: translate(-50%, -50%) scale(1); }
 }
 
+/* line animation */
 @keyframes line-fade {
   0% { opacity: 0; transform: translateY(10px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fade-slide-out {
-  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -45%) scale(0.95); }
+.line {
+  opacity: 0;
+  animation: line-fade 0.4s ease forwards;
 }
 
+/* screen fade close */
+@keyframes fade-slide-out {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+/* bounce-in animation */
 @keyframes bounce-in {
   0% {
     transform: scale(0.4);
@@ -41,6 +51,45 @@
   100% {
     transform: scale(1);
   }
+}
+
+/* crt flicker */
+@keyframes crt-glow {
+  0% {
+    text-shadow:
+      0 0 2px #6600ff,
+      0 0 5px #6600ff,
+      0 0 10px #6600ff,
+      3px 3px 10px #6600ff;
+  }
+  100% {
+    text-shadow:
+      0 0 3px #6600ff,
+      0 0 7px #6600ff,
+      0 0 14px #6600ff,
+      4px 4px 12px #6600ff;
+  }
+}
+
+@keyframes glitch {
+  0% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+  10% { clip-path: inset(10% 0 85% 0); transform: translate(-3px, -2px); }
+  20% { clip-path: inset(60% 0 20% 0); transform: translate(2px, 1px); }
+  30% { clip-path: inset(30% 0 50% 0); transform: translate(-1px, 2px); }
+  40%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+}
+
+@keyframes glitch-color {
+  0% {
+    filter: none;
+  }
+  100% {
+    filter: none;
+  }
+}
+
+.main-title.glitch-active {
+  animation: glitch 0.4s steps(2, end), glitch-color 0.4s ease-in-out;
 }
 
 /* === body */
@@ -153,23 +202,33 @@ h1 {
   margin: 20px 0 5px;
 }
 
-/* === line animation */
-.line {
-  opacity: 0;
-  animation: line-fade 0.4s ease forwards;
-}
-
 /* === perspective hover */
 .perspective-hover {
   display: inline-block;
   transform-style: preserve-3d;
   will-change: transform;
   transition: transform 0.2s ease, box-shadow 0s ease, filter 0.2s ease;
+  position: relative;
+  z-index: 1;
 }
 .perspective-hover:hover {
   transform: perspective(600px) rotateX(5deg) rotateY(-5deg) scale(1.3);
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
   filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+.perspective-hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: inherit;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* === text shimmer effect */
@@ -194,6 +253,7 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
+  max-width: 500px;
   transform: translate(-50%, -50%);
   padding: 2rem 2rem;
   background: rgba(0, 0, 0, 0.3);
@@ -209,6 +269,13 @@ h1 {
   animation: fade-slide-out 0.4s ease-out forwards !important;
 }
 
+#links, #about, #last {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 10px;
+}
+
 /* === images */
 .header-image { 
   margin-right: 10px; 
@@ -219,16 +286,6 @@ h1 {
   object-fit: contain; 
   -webkit-user-drag: none;
   border-radius: 10px;
-}
-.stretched-image { 
-  height: 100px; width: 200px; object-fit: fill; 
-}
-
-.lastfm-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 10px;
 }
 
 .cover-image {
@@ -266,7 +323,7 @@ a:active {
 /* Buttons */
 .button, #tech .button, #specs .button, .fixed-close {
   position: sticky;
-  top: 15px;
+  top: 5px;
   right: 15px;
   margin-left: auto;
   margin-bottom: -40px; /* <<< to usuwa "wcięcie" */
@@ -282,7 +339,7 @@ a:active {
   background: #666;
   border: 2px solid #444;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 3px 10px;
   cursor: pointer;
   transition: transform .2s ease, color .3s ease, background-color .3s ease;
 }
@@ -307,8 +364,8 @@ a:active {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
-  margin: 16px auto;
+  gap: 3px;
+  margin: 1px auto;
   max-width: 100%;
 }
 
@@ -415,53 +472,29 @@ a:active {
   border-color: #b1271b;
 }
 
-
-/* === CRT flicker */
-@keyframes crt-glow {
-  0% {
-    text-shadow:
-      0 0 2px #6600ff,
-      0 0 5px #6600ff,
-      0 0 10px #6600ff,
-      3px 3px 10px #6600ff;
-  }
-  100% {
-    text-shadow:
-      0 0 3px #6600ff,
-      0 0 7px #6600ff,
-      0 0 14px #6600ff,
-      4px 4px 12px #6600ff;
-  }
+.circle-btn.osu:hover {
+  background: radial-gradient(circle at 30% 107%, #ff66aa 0%, #ff5ea6 40%, #ff4aa2 70%, #ff3399 100%);
+  border-color: #ff66aa;
+  color: white;
 }
 
-@keyframes glitch {
-  0% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
-  10% { clip-path: inset(10% 0 85% 0); transform: translate(-3px, -2px); }
-  20% { clip-path: inset(60% 0 20% 0); transform: translate(2px, 1px); }
-  30% { clip-path: inset(30% 0 50% 0); transform: translate(-1px, 2px); }
-  40%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+.circle-btn osu img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1) hue-rotate(180deg);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-@keyframes glitch-color {
-  0% {
-    filter: none;
-  }
-  100% {
-    filter: none;
-  }
-}
-
-.main-title.glitch-active {
-  animation: glitch 0.4s steps(2, end), glitch-color 0.4s ease-in-out;
-}
-
 
 /* === submenus */
 #tech, #specs {
   position: absolute;
   display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 80%;
   max-height: 50vh;
+  max-width: 800px;
   padding: 1rem 1.1rem;
   box-shadow: 1.5rem 1.5rem 2rem #000;
   font-size: 17px;
@@ -480,22 +513,6 @@ a:active {
 
 /* === layout elements */
 
-.brand-button {
-  font-size: 1.2rem;
-  padding: 8px 16px;
-  margin: 8px 0;
-  background: #111;
-  color: #fff;
-  border: 2px solid #444;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  transition: all 0.3s ease;
-  font-family: inherit;
-  text-decoration: none; /* Disable underline */
-}
-
 #copyright {
   text-align: left; 
   font-weight: bold;
@@ -513,8 +530,22 @@ a:active {
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-body.light #copyright a {
-  color: #000;
+/* === tech submenu stuff */
+
+.brand-button {
+  font-size: 1.2rem;
+  padding: 8px 16px;
+  margin: 8px 0;
+  background: #111;
+  color: #fff;
+  border: 2px solid #444;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  text-decoration: none; /* Disable underline */
 }
 
 .brand-button:hover {
@@ -523,24 +554,6 @@ body.light #copyright a {
   border-color: #6600ff;
   transform: scale(1.03);
   text-shadow: 0 0 3px #000;
-}
-
-body.light .brand-button {
-  background: #eee;
-  color: #000;
-  border-color: #aaa;
-}
-
-body.light .brand-button:hover {
-  background: #9900ff;
-  color: #fff;
-  border-color: #9900ff;
-}
-
-body.light .circle-btn {
-  background: #fff;
-  color: #000;
-  border-color: #888;
 }
 
 .brand-button .arrow {
@@ -553,12 +566,13 @@ body.light .circle-btn {
   transform: rotate(180deg);
 }
 
-
 #phone-list p {
   margin: 1px 0;
   line-height: 1.1;
 }
+
 .brand-section { margin-bottom: 2px; }
+
 .brand-header-container {
   display: flex;
   align-items: center;
@@ -568,203 +582,11 @@ body.light .circle-btn {
   display: inline-block;
   transition: transform 0.3s ease;
 }
+
 .toggle.open { transform: rotate(180deg); }
 .phone-list { padding-left: 15px; }
-/* #widget, small { margin: 2px; } */
 
-#widget {
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 10px auto;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0);
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-/* Last played song info styling */
-.lastfm-info {
-  display: block;
-  text-align: center;
-  font-size: 0.95em;
-  font-weight: bold;
-}
-
-#song {
-  text-align: left;
-  line-height: 1.3;
-  margin-bottom: 0.3em;
-}
-
-.song-link {
-  text-decoration: underline;
-  color: inherit;
-}
-
-.song-name {
-  font-weight: 600;
-  font-size: 1.1em;
-}
-
-.artist-name {
-  font-size: 0.9em;
-  opacity: 0.8;
-  display: block;
-}
-
-#status {
-  text-align: left;
-  font-size: 0.85em;
-  opacity: 0.7;
-  margin-bottom: 0.5em;
-}
-
-body.light .lastfm-info {
-  color: #444;
-}
-
-/* ====== mobile responsiveness */
-@media only screen and (max-width: 600px) {
-  .screen, #tech, #specs {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    bottom: 0 !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 30px;
-    box-sizing: border-box;
-    box-shadow: none !important;
-    overflow-y: auto !important;
-    transform: none !important;
-    max-height: 100vh !important;
-    height: auto!important;
-  }
-
-  a {
-    font-size: 20px;
-  }
-
-  .circle-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-  }
-
-  #song {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .separator {
-    display: none;
-  }
-  .artist-name {
-    font-size: 0.9em;
-    opacity: 0.8;
-  }
-
-  p.line,
-  li.line {
-    font-size: 18px;
-    line-height: 1.2;
-  }
- 
-  .button {
-    z-index: 10000 !important;
-  }
-
-  .header-image {
-    height: 70px !important;
-  }
-
-  .main-title {
-    font-size: clamp(36px, 10vw, 72px);
-    letter-spacing: 1px;
-    margin-top: 10px;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 2px;
-    text-decoration-color: #6600ff;
-  }
-
-  
-}
-
-/* === touch devices */
-@media (hover: none) and (pointer: coarse) {
-  .perspective-hover {
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
-    transform: none !important;
-    box-shadow: none !important;
-    filter: none !important;
-    transition: none !important;
-  }
-
-  .perspective-hover:hover {
-    transform: none !important;
-    box-shadow: none !important;
-    filter: none !important;
-  }
-
-  #theme-toggle {
-    position: fixed !important;
-    bottom: 15px !important;
-    right: 15px !important;
-    width: 46px !important;
-    height: 46px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border-radius: 10px !important;
-    background: #444 !important;
-    color: #fff !important;
-    border: 2px solid #888 !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    transform: none !important;
-    transition: none !important;
-    max-width: none !important;
-    z-index: 9999 !important;
-    text-align: center;
-  }
-
-  #theme-toggle:hover {
-    transform: none !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
-    background: #444 !important;
-    color: #fff !important;
-    border-color: #888 !important;
-  }
-
-  #theme-label {
-    display: none !important;
-  }
-
-  #theme-icon {
-    font-size: 22px !important;
-    pointer-events: none !important;
-  }
-}
-
-/* === desktop responsiveness */
-@media (min-width: 601px) {
-  #tech, #specs {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 800px;
-    min-width: 500px;
-    padding: 1.5rem 2rem;
-  }
-}
+/* === light mode stuff */
 
 body.light {
   background: #f0f0f0;
@@ -774,13 +596,28 @@ body.light {
 body.light .screen,
 body.light #specs,
 body.light #tech {
-  background: rgba(255, 255, 255, 0.7); /* ← PRZEZROCZYSTE TŁO */
+  background: rgba(255, 255, 255, 0.7);
   border-color: #aaa;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px); /* ← dodaj dla pewności */
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
+#links, #about, #last {
+  box-shadow: 0px 0px 7px rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 10px;
+}
+
+body.light #links, 
+body.light #about, 
+body.light #last {
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 10px;
+}
 
 body.light a {
   color: #111;
@@ -809,15 +646,9 @@ body.light .button:hover {
   color: #111;
 }
 
-body.light .perspective-hover:hover {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
-  filter: brightness(1.1) drop-shadow(0 0 8px rgba(0, 0, 0, 0.4)) !important;
-}
-
 body.theme-transition {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
-
 
 #theme-toggle {
   position: fixed;
@@ -889,30 +720,240 @@ body.light #theme-toggle:hover {
   color: #fff;
 }
 
-.glitch-text {
-  animation: glitchText 0.5s steps(10) forwards;
+body.light #copyright a {
+  color: #000;
 }
 
-
-.perspective-hover {
-  position: relative;
-  z-index: 1;
+body.light .brand-button {
+  background: #eee;
+  color: #000;
+  border-color: #aaa;
 }
 
-.perspective-hover::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%);
-  border-radius: inherit;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-  z-index: -1;
-  pointer-events: none;
+body.light .brand-button:hover {
+  background: #9900ff;
+  color: #fff;
+  border-color: #9900ff;
 }
 
-body.light .perspective-hover::before {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+body.light .circle-btn {
+  background: #fff;
+  color: #000;
+  border-color: #888;
+}
+
+ body.light .osu-logo {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+ body.light .osu:hover .osu-logo {
+  filter: invert(0) hue-rotate(360deg);
+}
+
+body.light .lastfm-info {
+  color: #444;
+}
+
+body.light .circle-btn:hover {
+  color: #fff;
+}
+
+/* === last.fm info and styling */
+.lastfm-info {
+  display: block;
+  text-align: center;
+  font-size: 0.95em;
+  font-weight: bold;
+}
+
+#song {
+  text-align: left;
+  line-height: 1.3;
+  margin-bottom: 0.3em;
+}
+
+.song-link {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.song-name {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.artist-name {
+  font-size: 0.9em;
+  opacity: 0.8;
+  display: block;
+  font-weight: bold;;
+}
+
+#status {
+  text-align: left;
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-bottom: 0.5em;
+}
+
+.lastfm-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+/* ====== mobile responsiveness */
+@media only screen and (max-width: 600px) {
+  .screen, #tech, #specs {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    bottom: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: none !important;
+    overflow-y: auto !important;
+    transform: none !important;
+    max-height: 100vh !important;
+    height: auto!important;
+  }
+
+  a {
+    font-size: 20px;
+  }
+
+  .circle-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .osu-logo {
+  width: 25px !important;
+  height: 25px !important;
+  }
+
+  #song {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .lastfm-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.1rem !important; 
+  padding: 30px !important;
+  }
+
+  .artist-name {
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+
+  p.line,
+  li.line {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+ 
+  .button {
+    z-index: 10000 !important;
+  }
+
+  .header-image {
+    display: none;
+  }
+
+  .main-title {
+    font-size: clamp(36px, 12vw, 72px);
+    letter-spacing: 1px;
+    margin-top: 10px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #6600ff;
+  }
+
+}
+
+/* === touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .perspective-hover {
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    transform: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .perspective-hover:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  #theme-toggle {
+    position: fixed !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    width: 46px !important;
+    height: 46px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 10px !important;
+    background: #444 !important;
+    color: #fff !important;
+    border: 2px solid #888 !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: none !important;
+    transition: none !important;
+    max-width: none !important;
+    z-index: 9999 !important;
+    text-align: center;
+  }
+
+  .circle-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  #theme-toggle:hover {
+    transform: none !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
+    background: #444 !important;
+    color: #fff !important;
+    border-color: #888 !important;
+  }
+
+  #theme-label {
+    display: none !important;
+  }
+
+  #theme-icon {
+    font-size: 22px !important;
+    pointer-events: none !important;
+  }
+
+  .osu-logo {
+  width: 25px !important;
+  height: 25px !important;
+  }
+
 }
