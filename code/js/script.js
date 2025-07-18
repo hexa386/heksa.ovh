@@ -307,7 +307,7 @@ function startTitleGlitchLoop() {
 startTitleGlitchLoop();
 
 // === devices.json rendering ===
-  fetch('/code/js/devices.json')
+  fetch('code/js/devices.json')
     .then(res => res.json())
     .then(data => {
       const brandsContainer = document.getElementById('brands-container');
@@ -387,7 +387,7 @@ startTitleGlitchLoop();
       createHeader('consoles', brandsContainer);
       renderDevices(data.consoles, brandsContainer);
     })
-    .catch(err => console.error('Failed to load devices.json:', err));
+    .catch(err => console.error('failed to load devices.json:', err));
 
 
 // === age calculation ===
