@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>hexa</title>
+  <link rel="icon" type="image/png" href="media/favicon.ico" />
+  <!--resources-->
+  <link rel="stylesheet" href="code/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.9.2/dist/tsparticles.min.js" integrity="sha256-5kED68Spy7K2CEbfu4CjV92DmZR5ZQFUoIR5qmPzZWg=" crossorigin="anonymous"></script>
+  <script defer src="code/js/script.js"></script>
+  <!--compatibility stuff-->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=0.8, user-scalable=no, minimal-ui">
+  <!--embeds-->
+  <meta property="og:title" content="hexa" />
+  <meta property="og:url" content="https://heksa.xyz" />
+  <meta name="theme-color" content="#ffffff" />
+</head>
+
+<body>
+  <div id="particles-js"></div>
+  <!--=== main screen ===-->
+  <div class="screen">
+    <!--=== theme button ===-->
+      <button id="theme-toggle" class="line">
+      <span id="theme-icon">☀️</span>
+      <span id="theme-label">light mode</span>
+      </button>
+    <!--=== title ===-->
+      <div id="title">
+        <header class="title line" />
+      <img src="media/pfp.jpeg" alt="pfp" class="perspective-hover header-image" />
+      <h1 class="main-title">heksa.ovh</h1>
+    </header>
+      </div><br />
+    <!--=== last.fm ===-->
+    <div id="last" class="line lastfm-container">
+           <p class="line">
+             <span id="song">loading...</span><br>
+              <span class="lastfm-info" id="status">
+              last played song on <strong><a href="http://last.fm/user/hexa727" target="_blank">last.fm</a></strong>
+              </span>
+           </p>
+           <img id="cover" class="cover-image perspective-hover" src=""/>
+    </div>
+    <br class="line" />
+    <!--=== links ===-->
+    <div id="links" class="line">
+      <div class="link-buttons line">
+          <a onclick="showElement('specs')" class="circle-btn specs"><i class="fas fa-microchip"></i></a>
+          <a href="https://t.me/hexa386" class="circle-btn tg" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://discordapp.com/users/1105531177886040114" class="circle-btn discord" target="_blank"><i class="fab fa-discord"></i></a>
+          <a href="https://github.com/hexa386" class="circle-btn github" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://instagram.com/anyl.hexa" class="circle-btn insta" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://steamcommunity.com/id/hexa386" class="circle-btn steam" target="_blank"><i class="fab fa-steam-symbol"></i></a>
+      </div>
+
+    </div>
+    <br class="line"/>
+    <!--=== footer ===-->
+    <div id="copyright" class="line">
+         &copy; 2025 heksa.ovh
+        <br>
+         <strong><a href="https://github.com/hexa386/heksa.ovh" target="_blank" rel="noopener">licensed</a></strong> under <strong><a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GNU GPL v3</a></strong>
+    </div>
+  </div>
+
+  <!--=== specs submenu ===-->
+  <div id="specs" class="screen glass">
+    <button class="button fixed-close" onclick="hideElement('specs');">&#10005;</button>
+    <h1 class="title line main-title">tech</h1>
+    <hr />
+    <p class="line">daily devices:</p>
+    <ul>
+      <li class="line">phone: <b>Google Pixel 8 Pro</b></li>
+      <li class="line">laptop: <b>ThinkPad T450 12/128</b></li>
+      <li class="line">audio player: <b>Sony Walkman NW-A45</b></li>
+      <li class="line">headphones: <b>Salnotes 7Hz Zero:2</b></li>
+      <li class="line">pc: <b>right below</b></li>
+    </ul>
+    <hr />
+    <p class="line">main workstation:</p>
+    <ul>
+      <li class="line">cpu: <b>Intel Core i5-12400F</b></li>
+      <li class="line">cpu cooler: <b>be quiet! Pure Rock BK009</b></li>
+      <li class="line">gpu: <b>MSI GeForce GTX 1060 6GB</b></li>
+      <li class="line">psu: <b>XFX XT 600W</b></li>
+      <li class="line">ram: <b>Kingston Beast DDR4 3200MHz 32GB (32GBx1)</b></li>
+      <li class="line">mobo: <b>ASRock B760M-HDV</b></li>
+      <li class="line">case: <b>SilentiumPC Regnum RG4T</b></li>
+      <li class="line">os: <b>Arch + Win11</b></li>
+      <li class="line">storage:</li>
+      <ul>
+        <li class="line">SSD Goodram CX400 512GB (archlinux)</li>
+        <li class="line">M.2 NVMe Adata XPG 256GB (win11)</li>
+        <li class="line">M.2 NVMe Kingston NV2 1TB (data)</li>
+        <li class="line">HDD WD Blue 1TB (archive1)</li>
+        <li class="line">HDD Seagate Barracuda 2TB (archive2)</li>
+      </ul>
+        <li class="line">peripherals:</li>
+      <ul>
+        <li class="line">mouse: <b>SPC Gear LIX</b></li>
+        <li class="line">keyboard: <b>SPC Gear GK630K Red</b></li>
+      </ul>
+    </ul>
+    <hr />
+        <a onclick="showElement('tech')" class="circle-btn tech line"><i class="fas fa-mobile-alt"></i>others</a>
+  </div>
+
+  <!--=== tech submenu ===-->
+  <div id="tech" class="screen scrollable-box">
+    <button class="button fixed-close" onclick="hideElement('tech');">&#10005;</button>
+    <h1 class="title line main-title">others</h1>
+    <ul>
+    <li class="line">if something doesn't have any notes, it doesn't have any flaws.</li>
+    <li class="line">duplicates mean I have multiple units.</li>
+    <li class="line">info may be outdated, last update: 16.07.2025</li>
+    </ul><hr />
+    <div id="phone-list">
+      <div id="brands-container"></div>
+    </div>
+  </div>
+
+</body>
+</html>
