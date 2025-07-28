@@ -436,14 +436,14 @@ a:active {
 
 .circle-btn.tech {
   width: 8rem !important;
-  font-size: 1rem;
-  justify-content: start;
+  font-size: 1rem !important;
+  justify-content: start !important;
   text-align: center !important;
 }
 
 .fa-mobile-alt {
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin-right: 1rem !important;
+  margin-left: 1rem !important;
 }
 
 /* === submenus */
@@ -912,6 +912,18 @@ body.light .circle-btn:hover {
     height: 40px;
     font-size: 24px;
   }
+
+  .circle-btn.tech {
+  width: 8rem !important;
+  font-size: 1rem !important;
+  justify-content: start !important;
+  text-align: center !important;
+} 
+
+.fa-mobile-alt {
+  margin-right: 1rem !important;
+  margin-left: 1rem !important;
+}
 
   #theme-toggle:hover {
     transform: none !important;
