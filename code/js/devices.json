@@ -45,8 +45,7 @@
     ],
     "laptops": [
       { "name": "HP Pavilion ZE4300" },
-      { "name": "Lenovo G580"},
-      { "name": "Lenovo ThinkPad T450" }
+      { "name": "Lenovo G580"}
     ],
     "consoles": [
       { "name": "Sony PlayStation 2 Fat" },
