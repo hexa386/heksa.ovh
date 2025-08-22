@@ -8,7 +8,7 @@
       { "name": "Samsung Galaxy Y" },
       { "name": "Apple iPhone 4 (GSM) 16GB", "note": "fmi and sim locked" },
       { "name": "Apple iPhone 4 (GSM) 16GB", "note": "fmi and sim locked" },
-      { "name": "Apple iPhone 4 (GSM) 16GB" }
+      { "name": "Apple iPhone 4 (GSM) 16GB" },
       { "name": "Apple iPhone 4s (GSM) 16GB", "note": "fmi locked" },
       { "name": "Apple iPhone 4s (GSM) 16GB", "note": "fmi locked" },
       { "name": "Apple iPhone 4s (GSM) 8GB", "note": "fmi locked" },
@@ -60,6 +60,7 @@
     ],
     "consoles": [
       { "name": "Sony PlayStation 2 Fat" },
+      { "name": "Sony PlayStation 3 Slim", "note": "broken bd drive" },
       { "name": "Nintendo Wii" },
       { "name": "Xbox One S", "note": "1TB" }
     ]
